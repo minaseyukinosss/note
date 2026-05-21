@@ -1,0 +1,34 @@
+{
+  "name": "week3-dev-workflow",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Week3: webpack engineering workflow",
+  "scripts": {
+    "dev": "webpack serve --config webpack.dev.js --env APP_TITLE=WebpackWeek3",
+    "build": "webpack --config webpack.prod.js --env APP_TITLE=WebpackWeek3Prod",
+    "typecheck": "tsc --noEmit",
+    "lint:js": "eslint \"src/**/*.{ts,tsx,js}\"",
+    "lint:css": "stylelint \"src/**/*.css\"",
+    "check": "npm run typecheck && npm run lint:js && npm run lint:css"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.29.0",
+    "@typescript-eslint/parser": "^8.29.0",
+    "css-loader": "^7.1.2",
+    "css-minimizer-webpack-plugin": "^7.0.2",
+    "eslint": "^9.22.0",
+    "eslint-config-prettier": "^10.1.1",
+    "html-webpack-plugin": "^5.6.3",
+    "mini-css-extract-plugin": "^2.9.2",
+    "style-loader": "^4.0.0",
+    "stylelint": "^16.15.0",
+    "stylelint-config-standard": "^37.0.0",
+    "terser-webpack-plugin": "^5.3.14",
+    "ts-loader": "^9.5.2",
+    "typescript": "^5.8.2",
+    "webpack": "^5.98.0",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.0",
+    "webpack-merge": "^6.0.1"
+  }
+}

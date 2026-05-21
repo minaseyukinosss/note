@@ -1,0 +1,64 @@
+---
+description: webpack 周学习笔记的整理规范
+globs: webpack/week*/notes/**/*.md
+alwaysApply: false
+---
+
+# 适用范围
+
+`webpack/weekX-*/notes/` 下的所有学习笔记（day notes、summary、quiz、report 等）。
+
+# 整理时的固定动作
+
+整理或新增本周笔记时：
+
+1. **追加到 `weekX-*/README.md` 的"笔记 `notes/`"小节**，保持索引最新。
+2. 检查文件名是否符合 `weekX-dayN-notes.md` / `weekX-summary.md` / `weekX-review-quiz.md` 这类模式。
+3. 笔记内引用代码时，路径写 `../code/...`，而不是 `./src/...`（因为代码已迁到 `code/` 子目录）。
+
+# 日报笔记模板
+
+```markdown
+# WeekX Day N 学习笔记
+
+## 今日目标
+
+## 实际产出
+- 完成：
+- 阻塞：
+
+## 关键知识点
+
+### <知识点 1>
+
+### <知识点 2>
+
+## 易错点 / 踩坑
+
+## 明日计划
+```
+
+# 周总结模板
+
+```markdown
+# WeekX 总结
+
+## 本周达成
+- [x] ...
+- [ ] ...（未完成的原因）
+
+## 知识地图
+
+## 关键产出
+- 代码：`../code/...`
+- 笔记：`./weekX-dayN-notes.md`
+
+## 复盘：做得好的 / 需改进的
+
+## 下周计划
+```
+
+# 不要做的事
+
+- 不要把代码片段塞进 `code/`，**代码片段写在笔记里即可**，`code/` 只放可运行工程。
+- 不要在 `notes/` 下创建子目录（保持平铺，方便检索）。

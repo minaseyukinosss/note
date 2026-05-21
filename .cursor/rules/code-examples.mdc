@@ -1,0 +1,28 @@
+---
+description: weekX/code 下可运行示例工程的约定
+globs: webpack/week*/code/**
+alwaysApply: false
+---
+
+# 定位
+
+`weekX-*/code/` 是配套笔记的**最小可运行示例**，不是生产工程。
+
+# 必须保持的特性
+
+- **最小依赖**：只装本周演示必需的包，不要顺手加 lodash/axios 等无关依赖。
+- **配置可读**：webpack 配置每个关键字段加一行中文注释，解释"为什么这么写"，而不是"做了什么"。
+- **可单独运行**：每个 `code/` 自带 `package.json`，进入即可 `npm install && npm run build`。
+- **入口清晰**：README 中给出 `npm install` → `npm run build/dev` 三行就能跑起来。
+
+# 禁止行为
+
+- 不要提交 `node_modules/`、`dist/`、`package-lock.json`（已在 `.gitignore`）。
+- 不要在示例中引入 TS/React 等本周主题之外的技术栈。
+- 不要把多个不相关的演示揉进同一个 `code/`，应该新建 `weekX-Y` 子项目。
+
+# 修改示例工程时
+
+1. 同步更新所在 `weekX-*/README.md` 的"代码 `code/`"小节。
+2. 若改动影响行为（如脚本名、产物路径），在对应日报笔记里追加一条记录。
+3. 保持 webpack 配置文件名与笔记中提到的一致，不要随意改名。

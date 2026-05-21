@@ -1,0 +1,14 @@
+{
+  "name": "week2-loader-plugin",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Week2: custom loader and plugin",
+  "scripts": {
+    "build": "webpack --config webpack.config.js",
+    "build:prod": "webpack --config webpack.config.js --mode production"
+  },
+  "devDependencies": {
+    "webpack": "^5.98.0",
+    "webpack-cli": "^6.0.1"
+  }
+}
