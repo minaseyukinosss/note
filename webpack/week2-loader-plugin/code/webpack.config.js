@@ -6,23 +6,29 @@ module.exports = (_, argv) => {
 
   return {
     mode,
-    entry: "./src/index.js",
+    entry: "./src/index.ts",
     output: {
       path: path.resolve(__dirname, "dist"),
       filename: "bundle.js",
       clean: true
     },
+    resolve: {
+      extensions: [".ts", ".tsx", ".js"]
+    },
     module: {
       rules: [
         {
-          test: /\.js$/,
+          test: /\.tsx?$/,
           exclude: /node_modules/,
-          use: {
-            loader: path.resolve(__dirname, "loaders/banner-loader.js"),
-            options: {
-              banner: "Week2 Day1 Banner"
-            }
-          }
+          use: [
+            {
+              loader: path.resolve(__dirname, "loaders/banner-loader.js"),
+              options: {
+                banner: "Week2 Day1 Banner"
+              }
+            },
+            "ts-loader"
+          ]
         }
       ]
     },

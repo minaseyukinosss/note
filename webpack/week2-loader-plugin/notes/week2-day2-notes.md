@@ -34,7 +34,7 @@
 ## 实验 2：失败构建路径
 
 ### 操作
-- 在 `src/index.js` 人为制造语法错误（例如少 `}`）。
+- 在 `src/index.ts` 人为制造语法错误（例如少 `}`）。
 - 执行：`npm run build`
 - 验证完成后恢复正确代码。
 
@@ -42,7 +42,7 @@
 - `compile` 是否仍触发：触发了
 - `done` 是否仍触发：触发了
 - `done` 中 success 是否为 `false`：是的
-- 报错信息是否出现在报告中：出现了（摘要：`Module parse failed: Unexpected token`，并提示处理链含 `./loaders/banner-loader.js`）。
+- 报错信息是否出现在报告中：出现了（摘要：`Module parse failed: Unexpected token` 或 TS 编译错误，处理链含 `ts-loader` 与 `./loaders/banner-loader.js`）。
 
 ### 结论（填写）
 - 构建失败时 `done` 是否还会执行：会

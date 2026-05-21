@@ -7,19 +7,23 @@
     "build:base": "webpack --config webpack.base.config.js",
     "build:opt": "webpack --config webpack.optimized.config.js",
     "analyze:opt": "webpack --config webpack.optimized.config.js --profile --json > stats.optimized.json",
-    "compare": "node scripts/compare-builds.js"
+    "compare": "node scripts/compare-builds.js",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "dayjs": "^1.11.13",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
+    "@types/lodash": "^4.17.24",
     "css-loader": "^7.1.2",
     "css-minimizer-webpack-plugin": "^7.0.2",
     "html-webpack-plugin": "^5.6.3",
     "mini-css-extract-plugin": "^2.9.2",
     "style-loader": "^4.0.0",
     "terser-webpack-plugin": "^5.3.14",
+    "ts-loader": "^9.5.2",
+    "typescript": "^5.8.2",
     "webpack": "^5.98.0",
     "webpack-bundle-analyzer": "^4.10.2",
     "webpack-cli": "^6.0.1"

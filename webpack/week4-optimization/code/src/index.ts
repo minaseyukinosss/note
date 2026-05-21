@@ -1,11 +1,16 @@
 import "./styles.css";
 import _ from "lodash";
 
-const app = document.getElementById("app");
+const appEl = document.getElementById("app");
+if (!appEl) {
+  throw new Error("#app not found");
+}
+const app: HTMLElement = appEl;
+
 const values = _.range(1, 6000);
 const shuffled = _.shuffle(values).slice(0, 10);
 
-async function bootstrap() {
+async function bootstrap(): Promise<void> {
   const { createReportText } = await import("./report");
   const panel = document.createElement("div");
   panel.className = "card";

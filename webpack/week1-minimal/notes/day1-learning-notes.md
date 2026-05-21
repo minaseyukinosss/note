@@ -3,17 +3,18 @@
 ## 今日目标与完成情况
 - 已完成项目启动与构建：`npm install`、`npm run build`、`npm run dev`。
 - 已修复 `index.html` 缺失问题：使用 `HtmlWebpackPlugin` 自动生成 `dist/index.html`。
-- 已读懂 `dist/bundle.js` 的核心结构：`模块表 + Runtime + 入口执行`。
+- 业务源码使用 TypeScript（`src/*.ts` + `ts-loader`），`commonjs-util.cjs` 仍保留用于 CommonJS 对照。
+- 已读懂 `dist/app.js` 的核心结构：`模块表 + Runtime + 入口执行`。
 - 已完成模块导出实验：`命名导出` 与 `默认导出` 的产物差异定位。
-- 已完成新增模块追踪：`extra.js` 能在模块定义区和入口执行区都定位到。
+- 已完成新增模块追踪：`extra.ts` 能在模块定义区和入口执行区都定位到。
 
 ## 核心主线（Entry -> 依赖图 -> Loader -> Runtime -> Output）
 1. `Entry`（入口）  
    - 概念：Webpack 开始构建的起点文件。  
-   - 本项目：`src/index.js`。
+   - 本项目：`src/index.ts`。
 2. `Dependency Graph`（依赖图）  
    - 概念：从入口递归收集所有依赖形成的关系图。  
-   - 本项目依赖示例：`styles.css`、`esm-util.js`、`commonjs-util.cjs`、`logo.svg`、`extra.js`。
+   - 本项目依赖示例：`styles.css`、`esm-util.ts`、`commonjs-util.cjs`、`logo.svg`、`extra.ts`。
 3. `Loader`（转换器）  
    - 概念：把不同类型模块转换成 Webpack 可继续处理的模块代码。  
    - 本项目重点：`css-loader` 与 `style-loader` 组合处理 CSS。
@@ -40,7 +41,7 @@
   - 常见场景下不是 ESM 那种活绑定体验。  
   - `Tree Shaking` 相对弱。
 - 本项目混用验证：  
-  - `esm-util.js` 用 ESM。  
+  - `esm-util.ts` 用 ESM。  
   - `commonjs-util.cjs` 用 CommonJS。  
   - 最终都被 Webpack 统一到 `__webpack_require__` 体系中执行。
 

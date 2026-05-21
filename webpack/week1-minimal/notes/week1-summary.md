@@ -11,7 +11,7 @@
 Webpack 的完整链路可以概括为：
 1. `Entry`（入口）
    - 概念：Webpack 构建的起点文件。
-   - 本项目：`src/index.js`
+   - 本项目：`src/index.ts`
 2. `Dependency Graph`（依赖图）
    - 概念：从入口递归解析依赖得到的关系图（模块之间依赖边）。
 3. `Loader`（转换器）
@@ -30,7 +30,7 @@ Webpack 的完整链路可以概括为：
   - 作用：模块执行缓存（避免重复执行）
 - `__webpack_require__`
   - 作用：模块加载/执行函数（按 moduleId 执行并返回导出）
-- `startup`（如 `__webpack_require__("./src/index.js")`）
+- `startup`（如 `__webpack_require__("./src/index.ts")`）
   - 作用：入口模块启动执行
 - 资源导出
   - `asset/resource`：JS 中通常得到“资源 URL”
@@ -53,7 +53,7 @@ Webpack 的完整链路可以概括为：
 ## 5. 你的口述标准答案（简版，可 1 分钟复述）
 > 我用 `week1-minimal` 从零理解了 Webpack 的主线：Webpack 从 `Entry`（入口）递归收集 `Dependency Graph`，对不同类型模块使用 `module.rules` 指定的 `Loader` 做转换，然后注入 `Runtime` 实现模块加载与缓存，最后由 `Output` 写出产物并由插件（如 `HtmlWebpackPlugin`）完成交付层生成。  
 > 在实验中，我验证了 `use` 的右到左执行顺序，以及 `css-loader` 负责转换、`style-loader` 负责把样式注入 `<style>`；同时对比了 `asset/resource` 输出独立文件 URL 与 `asset/inline` 内联 data URL。  
-> 我还能在 `dist` 产物里定位 `__webpack_modules__`、`__webpack_require__` 和入口 `__webpack_require__("./src/index.js")` 来解释产物与源码的对应关系。
+> 我还能在 `dist` 产物里定位 `__webpack_modules__`、`__webpack_require__` 和入口 `__webpack_require__("./src/index.ts")` 来解释产物与源码的对应关系。
 
 ## 6. 复习自测建议
 - 做 `week1-minimal/week1-review-quiz.md`（你已生成）

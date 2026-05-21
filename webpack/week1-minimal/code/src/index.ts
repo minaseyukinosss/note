@@ -1,8 +1,9 @@
 import "./styles.css";
 import { createMessage } from "./esm-util";
-const formatTitle = require("./commonjs-util.cjs");
 import logoUrl from "./assets/logo.svg";
 import getExtraText from "./extra";
+
+const formatTitle = require("./commonjs-util.cjs") as (title: string) => string;
 
 const root = document.createElement("div");
 root.className = "card";

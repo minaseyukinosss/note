@@ -12,6 +12,7 @@
 ### 1) Loader 是源码转换器
 - 输入：模块源码字符串（`source`）。
 - 输出：转换后的源码字符串（返回值会作为该模块后续打包输入）。
+- 入口为 `src/index.ts`，处理链为 `ts-loader` → `banner-loader`（先编译 TS，再注入注释）。
 - 本项目证据：`banner-loader` 返回 ``/* banner */ + source``，最终体现在 `dist/bundle.js` 顶部注释。
 
 ### 2) Plugin 是生命周期扩展器

@@ -85,5 +85,5 @@
   - 作用：核心加载函数（加载、执行、返回模块导出）。
 - 第 4 步：定位 runtime 辅助函数（`d/r/n/o`）与 `__webpack_require__.p`  
   - 作用：模块语义兼容 + 资源路径前缀（publicPath）。
-- 第 5 步：定位 startup（`__webpack_require__("./src/index.js")`）  
+- 第 5 步：定位 startup（`__webpack_require__("./src/index.ts")`）  
   - 作用：入口启动执行。

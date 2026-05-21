@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "isolatedModules": true
+  },
+  "include": [
+    "webpack/**/code/**/src/**/*.ts",
+    "webpack/**/code/**/src/**/*.d.ts"
+  ],
+  "exclude": ["**/node_modules", "**/dist", "**/dist-*"]
+}

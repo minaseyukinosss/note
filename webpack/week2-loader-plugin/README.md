@@ -18,10 +18,12 @@ cd code
 npm install
 npm run build
 npm run build:prod
+npm run typecheck
 ```
 
 关键实现：
-- `code/loaders/banner-loader.js`：给每个 JS 模块注入注释头。
+- `code/src/index.ts`：TypeScript 入口，经 `ts-loader` + 自定义 loader 处理。
+- `code/loaders/banner-loader.js`：给每个 TS/JS 模块注入注释头。
 - `code/plugins/build-report-plugin.js`：在 `done` hook 输出构建报告（耗时、产物大小）。
 
 ## 验收清单

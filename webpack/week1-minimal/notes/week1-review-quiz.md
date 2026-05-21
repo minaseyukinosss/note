@@ -18,7 +18,7 @@
 2. 在当前项目里，`entry` 指向的是：  
    A. `dist/index.html`  
    B. `src/styles.css`  
-   C. `src/index.js`  
+   C. `src/index.ts`  
    D. `webpack.config.js`
 
 3. `asset/resource` 的典型行为是：  

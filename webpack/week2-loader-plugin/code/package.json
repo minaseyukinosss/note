@@ -5,9 +5,12 @@
   "description": "Week2: custom loader and plugin",
   "scripts": {
     "build": "webpack --config webpack.config.js",
-    "build:prod": "webpack --config webpack.config.js --mode production"
+    "build:prod": "webpack --config webpack.config.js --mode production",
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
+    "ts-loader": "^9.5.2",
+    "typescript": "^5.8.2",
     "webpack": "^5.98.0",
     "webpack-cli": "^6.0.1"
   }

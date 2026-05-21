@@ -17,8 +17,8 @@
 cd code/mpa-demo && npm install && npm run build
 
 # Module Federation（分别启动 remote 与 host）
-cd code/federation-demo/remote && npm install && npm start
-cd code/federation-demo/host   && npm install && npm start
+cd code/federation-demo/remote && npm install && npm run dev
+cd code/federation-demo/host   && npm install && npm run dev
 ```
 
 ## 建议实践顺序

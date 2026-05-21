@@ -19,11 +19,12 @@ cd code
 npm install
 npm run build
 npm run dev
+npm run typecheck
 ```
 
 目录说明：
-- `code/src/index.js`：入口文件，演示 ESM + CommonJS + CSS + 资源引用。
-- `code/src/esm-util.js`：ESM 示例模块。
+- `code/src/index.ts`：入口文件（TypeScript），演示 ESM + CommonJS + CSS + 资源引用。
+- `code/src/esm-util.ts`：ESM 示例模块。
 - `code/src/commonjs-util.cjs`：CommonJS 示例模块。
 - `code/src/styles.css`：样式处理示例。
 - `code/src/assets/logo.svg`：资源模块示例。

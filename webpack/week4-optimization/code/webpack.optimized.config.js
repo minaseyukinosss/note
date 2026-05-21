@@ -7,7 +7,7 @@ const TerserPlugin = require("terser-webpack-plugin");
 module.exports = {
   mode: "production",
   entry: {
-    app: "./src/index.js"
+    app: "./src/index.ts"
   },
   output: {
     path: path.resolve(__dirname, "dist-optimized"),
@@ -18,8 +18,16 @@ module.exports = {
   cache: {
     type: "filesystem"
   },
+  resolve: {
+    extensions: [".ts", ".tsx", ".js"]
+  },
   module: {
     rules: [
+      {
+        test: /\.tsx?$/,
+        use: "ts-loader",
+        exclude: /node_modules/
+      },
       {
         test: /\.css$/i,
         use: [MiniCssExtractPlugin.loader, "css-loader"]
