@@ -14,13 +14,10 @@
 
 ## 代码 `code/`
 
+环境在主题根目录 [`ai-agent/`](../README.md#python-环境全主题共用装一次即可) 统一配置（`.venv` + `.env`），装一次后各 week 通用。
+
 ```bash
 cd code
-# 需要 Python ≥ 3.10（macOS 可用 python3.12 / python3.11）
-python3.12 -m venv .venv
-source .venv/bin/activate   # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-cp .env.example .env        # 填入你的 API Key
 python hello.py
 python chat.py
 python function_calling_demo.py
@@ -35,7 +32,7 @@ python function_calling_demo.py
 
 ## 环境变量
 
-在 `code/.env` 中配置（勿提交 Git）：
+推荐在 `ai-agent/.env` 配置一次（勿提交 Git）；也可在 `code/.env` 单独覆盖：
 
 ```bash
 OPENAI_API_KEY=sk-xxx

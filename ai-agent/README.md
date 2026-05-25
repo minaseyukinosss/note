@@ -14,6 +14,7 @@
 | 周次 | 说明 | 入口 |
 | --- | --- | --- |
 | Week1 | LLM 调用 + 多轮对话 + Function Calling | [`week1-hello-llm/`](./week1-hello-llm/README.md) |
+| Week2 | 手写 ReAct Agent（纯 openai SDK） | [`week2-react-agent/`](./week2-react-agent/README.md) |
 
 ## 笔记索引
 
@@ -36,6 +37,33 @@
 - Python 基础（async、装饰器、类型注解）。
 - 至少调用过一次 OpenAI / Anthropic / 国产大模型 API。
 - 了解 Prompt Engineering 基础（System Prompt、Few-shot、CoT）。
+
+## Python 环境（全主题共用，装一次即可）
+
+需要 **Python ≥ 3.10**（macOS 推荐 `python3.12`）。各 week **共用** 同一虚拟环境与 `.env`，不用每周重装或切换。
+
+```bash
+cd ai-agent
+python3.12 -m venv .venv
+source .venv/bin/activate          # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+cp .env.example .env               # 填入 API Key，所有 week 自动读取
+```
+
+之后任意 week 的代码目录直接跑（已激活 venv 时）：
+
+```bash
+python week1-hello-llm/code/hello.py
+python week2-react-agent/code/react_agent.py
+```
+
+未 `activate` 时，用绝对路径也行：
+
+```bash
+ai-agent/.venv/bin/python week2-react-agent/code/react_agent.py
+```
+
+`code/.env` 仍可单独配置，会覆盖主题级 `ai-agent/.env`。
 
 ## 后续扩展
 
