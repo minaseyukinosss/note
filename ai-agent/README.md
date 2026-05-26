@@ -15,6 +15,7 @@
 | --- | --- | --- |
 | Week1 | LLM 调用 + 多轮对话 + Function Calling | [`week1-hello-llm/`](./week1-hello-llm/README.md) |
 | Week2 | 手写 ReAct Agent（纯 openai SDK） | [`week2-react-agent/`](./week2-react-agent/README.md) |
+| Week3 | LangGraph 重写 + 记忆 + Demo 交付 | [`week3-langgraph/`](./week3-langgraph/README.md) |
 
 ## 笔记索引
 
@@ -55,6 +56,7 @@ cp .env.example .env               # 填入 API Key，所有 week 自动读取
 ```bash
 python week1-hello-llm/code/hello.py
 python week2-react-agent/code/react_agent.py
+python week3-langgraph/code/langgraph_agent.py
 ```
 
 未 `activate` 时，用绝对路径也行：

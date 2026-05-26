@@ -1,0 +1,2 @@
+# Week3 与主题根 requirements.txt 一致；此处仅作说明
+# 安装：cd ai-agent && pip install -r requirements.txt

@@ -51,3 +51,7 @@ alwaysApply: false
 ```
 
 按需增减小节，**不要为了凑结构而堆砌内容**。
+
+# 复习自洽（`notes/` 下）
+
+`notes/` 目录下的笔记另遵守 [notes-self-contained.mdc](./notes-self-contained.mdc)：不用「Week2」「比上一周」等依赖记忆的写法；对照须写清文件名与一句话定义。

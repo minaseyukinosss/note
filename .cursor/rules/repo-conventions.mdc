@@ -37,6 +37,7 @@ alwaysApply: true
 1. 必须在父级 `README.md` 中**追加导航链接**，保持目录可发现。
 2. 若新建主题，需创建对应 `README.md` 作为索引。
 3. 若复制/重组 webpack 类工程，沿用 `notes/ + code/` 双子目录约定。
+4. `notes/` 下笔记须**自洽可读**（复习时不假设读者记得第几周）：见 [notes-self-contained.mdc](./notes-self-contained.mdc)。
 
 # 语言
 

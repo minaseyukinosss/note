@@ -1,0 +1,45 @@
+---
+description: 学习笔记须自洽可读，复习时不依赖「还记得第几周」
+globs: "**/notes/**/*.md"
+alwaysApply: false
+---
+
+# 原则
+
+笔记按**复习场景**写：读者可能隔几周再看，**不能假设还记得 Week2、上一阶段、裸写**等上下文。
+
+- 正文必须 standalone 读懂；链接只作深入阅读，不是理解前提。
+- 优先级：**说清楚是什么 > 对照表 > 周次编号**。
+
+# 周次 / 阶段引用
+
+首次提到某周或某阶段时，必须附带**一句话定义 + 文件链接**：
+
+```markdown
+> **手写版**：[`react_agent.py`](../../week2-react-agent/code/react_agent.py)——纯 openai SDK，`for` 循环里自己 dispatch 工具。
+```
+
+之后可用简称「手写版」「LangGraph 版」，不要再单独写「Week2」「Week3」而不解释。
+
+# 禁止写法
+
+- ❌ `LangGraph 比 Week2 多解决了什么？`
+- ❌ `行为应接近 Week2`
+- ❌ `带着 Week2 对照心态`
+- ❌ 对照表列名仅写 `Week2` / `裸写`，无文件名或实现说明
+- ❌ 自测题依赖「还记得上一周学了什么」
+
+# 推荐写法
+
+- ✅ `LangGraph 在工程上多提供了什么？` → 直接列能力，不依赖对照对象
+- ✅ `与手写版（react_agent.py，openai SDK + for 循环）行为应接近`
+- ✅ 对照表列名：`手写版 react_agent.py` | `LangGraph langgraph_agent.py`
+- ✅ 自测题只考本文概念，例如 State / node / 条件边 / Checkpointer
+
+# 复盘与总结
+
+`复盘`、`总结` 类文件：
+
+1. 标题用**主题名**（如 `LangGraph StateGraph`），不用 `对照 Week2`。
+2. 「与 XX 的衔接」小节写清 XX 是什么；可链到 prior 笔记，但小结不能只有链接。
+3. 验收自测每题应能**不看其他文件**回答。

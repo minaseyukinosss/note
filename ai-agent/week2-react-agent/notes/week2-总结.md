@@ -1,0 +1,85 @@
+# Week2 总结：手写 ReAct Agent
+
+## 背景 / 学习目标
+
+- 不用任何 Agent 框架，纯 `openai` SDK 写出可运行的 ReAct 循环。
+- 从概念（Day 8-9）到实现（Day 10-12）再到踩坑复盘（Day 13-14），形成 Week3 对比基线。
+
+## 本周脉络
+
+```text
+Week1 Function Calling（固定两轮）
+    ↓ 外面套 for / while
+Week2 ReAct Agent（动态多轮，直到无 tool_calls）
+    ↓ 同一逻辑，换 LangGraph 组织
+Week3 node / state / edge + Checkpointer
+```
+
+| 天数 | 产出 | 入口 |
+| --- | --- | --- |
+| Day 8-9 | Workflow / Agent / augmented LLM 概念 | [day8-学习笔记](./day8-学习笔记.md)、[自测复盘](./day8-自测复盘.md) |
+| Day 10-12 | `react_agent.py` 主循环 + 三工具 | [学习笔记](./day10-12-react_agent学习笔记.md)、[`../code/react_agent.py`](../code/react_agent.py) |
+| Day 13-14 | 失败场景 + Agent 本质三问 | [复盘](./day13-14-复盘.md) |
+
+## 核心收获（5 条）
+
+1. **Agent 本质**：LLM 只产出 `tool_calls`；Python 执行工具并把 observation 塞回 `messages`；循环直到模型不再要工具。
+2. **ReAct 在本仓库**：不是论文里的 `Thought/Action/Observation` 文本格式，而是 **Function Calling 协议 × 循环**。
+3. **`messages` 是唯一 state**：API 无状态，每轮发全量历史；排错先看 trace，再改 prompt / 工具。
+4. **Agent vs Workflow**：本仓库没写死「先天气后计算」；路径由模型根据 observation 动态决定。
+5. **不可控是常态**：模型可能乱选工具、心算跳过 `calculator`；框架也解决不了，要靠 prompt 与工具设计。
+
+## 代码结构一览
+
+| 模块 | 对应概念 |
+| --- | --- |
+| `SYSTEM_PROMPT` | 行为边界（何时用工具、无能力不编造） |
+| `TOOLS` | 工具 schema；`description` 是选工具的主要依据 |
+| `dispatch_tool` | Action 的执行层 |
+| `role: tool` 的 `content` | Observation |
+| `run_agent` 的 `for` | ReAct 循环 |
+| `if not msg.tool_calls: return` | 退出条件 |
+| `max_steps` | 防死循环上限（不是正常退出条件） |
+
+## 踩过的坑
+
+| 现象 | 原因 / 对策 |
+| --- | --- |
+| API 报错、模型胡言 | assistant（含 `tool_calls`）必须先 append；`tool` 必须带 `tool_call_id` |
+| 第二轮不再调工具 | 某轮 `create` 漏传 `tools=TOOLS` |
+| 除零整个进程挂掉 | 工具内返回错误字符串，不要未捕获异常 |
+| 「气温 +10」没调计算器 | 模型心算；见 [day13-14-复盘](./day13-14-复盘.md) |
+| `max_steps=1` 无最终回答 | 只够一轮工具，来不及收尾——说明步数上限是硬闸 |
+
+## 验收自测（口头能答即过关）
+
+1. **ReAct 循环怎么退出？** — 本轮 assistant **没有** `tool_calls`（不是「不调 API」）。
+2. **LLM 会真调工具吗？** — 不会；它输出 JSON，你在 `dispatch_tool` 里执行。
+3. **Workflow 和 Agent 差在哪？** — 谁定路径：代码 if-else vs 模型看 observation 决定下一步。
+4. **多步场景下 messages 长什么样？** — `system → user → assistant(tool_calls) → tool → … → assistant(最终 content)`。
+5. **为什么简单任务别上 Agent？** — 循环 + 多轮 API 增加延迟、成本和不可控；一次 prompt 或 Workflow 更稳。
+
+## 与 Week3 的衔接
+
+Week2 你亲手写了 `run_agent` 里的（对照 Week3）：
+
+| Week2 | 干什么 | Week3 大致对应 |
+| --- | --- | --- |
+| `messages` | 唯一要记住的对话状态 | `AgentState.messages` |
+| `create(...)` | 调模型，可能返回 `tool_calls` | `agent` 节点 |
+| `dispatch_tool` + append `role: tool` | 执行工具、写 observation | `tools` 节点 |
+| `if not msg.tool_calls: return` | 无工具调用 → 结束 | 条件边 → `END`；否则 → `tools` |
+| `for step in range(max_steps)` | 最多跑几轮「调模型」 | 图里 `agent → tools → agent` 循环；用 `recursion_limit` 限步 |
+
+注意：原写法「一步 = create 或 dispatch」容易误解。**一轮 ReAct** 在 Week2 里通常是：先 `create`，若有 `tool_calls` 再在同一轮 `for` 里 `dispatch`（LangGraph 拆成两个 node）。`max_steps` 数的是**循环次数（几次 create）**，不是 LangGraph 的 node 执行次数。
+
+Week3 用 LangGraph 把同一 Agent **功能不变、只换实现**，对照：
+
+- 少写了哪些样板代码？
+- 「心算跳过 calculator」有没有变好？（预期：不会）
+
+入口：[`week3-langgraph`](../../week3-langgraph/README.md)。
+
+## 小结
+
+Week2 的价值不在「会调 LangChain API」，而在**能说清底层在干什么**。到这里你已经具备：看 `messages` 排错、区分 Agent 与 Workflow、知道框架也治不了模型乱来——这三点比抄一千行教程更实在。

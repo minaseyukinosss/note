@@ -6,11 +6,16 @@
 - Day 10-12：纯 `openai` SDK 写出 Agent 循环（天气 + 计算器 + 可选 search）。
 - Day 13-14：故意制造失败场景，写复盘笔记。
 
+## 本周总结
+
+- [Week2 总结](./notes/week2-总结.md)（脉络、核心收获、踩坑、自测、与 Week3 衔接）
+
 ## 笔记 `notes/`
 
 - [Day 8-9 学习笔记](./notes/day8-学习笔记.md)（ReAct 概念 + Anthropic 博文导读）
 - [Day 8-9 自测复盘](./notes/day8-自测复盘.md)（概念测验错题 + 规范答案）
 - [Day 10-12 `react_agent.py` 学习笔记](./notes/day10-12-react_agent学习笔记.md)（主循环、工具层、与 Week1 对比）
+- [Day 13-14 复盘](./notes/day13-14-复盘.md)（失败场景、工具跳过、Agent 本质三问）
 
 ## 代码 `code/`
 
