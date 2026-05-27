@@ -1,4 +1,10 @@
-"""共用配置：LangChain ChatOpenAI + .env（兼容 DeepSeek Base URL）。"""
+"""
+共用配置：LangChain ChatOpenAI + .env（兼容 DeepSeek Base URL）。
+
+.env 加载顺序（后者覆盖前者）：
+  1. ai-agent/.env          — 主题级共用（推荐放 OPENAI_* / TAVILY_*）
+  2. week3-langgraph/code/.env — 仅本周覆盖
+"""
 
 import os
 import sys
@@ -36,8 +42,9 @@ def get_llm() -> ChatOpenAI:
     kwargs: dict = {
         "model": get_model(),
         "api_key": api_key,
-        "temperature": 0,
+        "temperature": 0,  # Agent 场景倾向确定性输出，减少随机选工具
     }
+    # 设 OPENAI_BASE_URL 即可走 DeepSeek 等 OpenAI 兼容 API，无需改代码
     base_url = os.getenv("OPENAI_BASE_URL")
     if base_url:
         kwargs["base_url"] = base_url
