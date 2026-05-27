@@ -39,10 +39,9 @@ pip install -r requirements.txt
 ## 笔记 `notes/`
 
 - [00 知识地图](./notes/00-知识地图.md)（手写 ReAct → LangGraph → Checkpointer → Demo）
-- [01 每日任务](./notes/01-每日任务.md)（每天跑什么、观察什么、交付什么）
+- [01 学习手册](./notes/01-学习手册.md)（当天唯一入口：任务、命令、观察点、关键结论和记录区）
 - [02 概念详解](./notes/02-概念详解.md)（state / node / edge / checkpointer / trace）
 - [03 实验与踩坑](./notes/03-实验与踩坑.md)（recursion limit、thread 隔离、Tavily、trace）
-- [04 过程记录](./notes/04-过程记录.md)（Day 15-21 的 LangGraph、真工具、checkpoint 和 Demo 交付记录）
 - [05 本周总结](./notes/05-本周总结.md)（三周收束 + 下一阶段建议）
 
 ## 代码 `code/`
@@ -82,7 +81,7 @@ python checkpoint_amnesia_demo.py  # 可选：换 thread_id 验证“失忆”
 - [ ] 对比 Week2：框架少写了循环骨架，但「心算跳过 calculator」仍可能出现。
 - [ ] `checkpoint_demo.py` 同一 `thread_id` 第二轮能引用上一轮上下文。
 - [ ] `checkpoint_amnesia_demo.py` 换 `thread_id` 后能观察到上下文隔离。
-- [ ] Day 20-21 选定场景并跑通 Langfuse trace（见 `04-过程记录.md`）。
+- [ ] Day 20-21 选定场景并跑通 Langfuse trace（见 `01-学习手册.md`）。
 - [ ] 能解释：checkpoint 存的是 state 快照，不是模型“长期记忆”。
 - [ ] 至少复跑 `05-评估用例.md` 中 W2-001 与 W3-001，对比裸写版和 LangGraph 版的工具路径。
 - [ ] 能说明：外部搜索 / 文件内容只能当数据，不能当系统规则。

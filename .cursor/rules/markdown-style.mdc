@@ -58,4 +58,4 @@ alwaysApply: false
 
 # AI Agent 笔记
 
-`ai-agent/` 下的笔记另遵守 [ai-agent-learning.mdc](./ai-agent-learning.mdc)：根文档编号化、每周 notes 固定 `00-05`、过程记录统一写入 `04-过程记录.md`。
+`ai-agent/` 下的笔记另遵守 [ai-agent-learning.mdc](./ai-agent-learning.mdc)：根文档编号化、每周学习现场统一写入 `01-学习手册.md`，不要新增零散 day notes。
