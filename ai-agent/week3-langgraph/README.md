@@ -44,6 +44,14 @@ pip install -r requirements.txt
 - [03 实验与踩坑](./notes/03-实验与踩坑.md)（recursion limit、thread 隔离、Tavily、trace）
 - [05 本周总结](./notes/05-本周总结.md)（三周收束 + 下一阶段建议）
 
+## Demo 交付 `demo/`（Day 20-21）
+
+- [Demo 交付索引](./demo/README.md)
+- [示例对话](./demo/示例对话.md)
+- [trace 记录](./demo/trace.md)
+- [边界用例](./demo/边界用例.md)
+- [评估记录](./demo/评估记录.md)
+
 ## 代码 `code/`
 
 环境变量与 Week1/Week2 相同，读 `ai-agent/.env`。
@@ -53,6 +61,7 @@ cd code
 python langgraph_agent.py          # Day 15-16：与 Week2 同功能
 python checkpoint_demo.py          # Day 17-19：多轮记忆示例
 python checkpoint_amnesia_demo.py  # 可选：换 thread_id 验证“失忆”
+python news_demo.py                # Day 20-21：Demo 交付脚本
 ```
 
 | 文件 | 对应天数 | 说明 |
@@ -60,6 +69,7 @@ python checkpoint_amnesia_demo.py  # 可选：换 thread_id 验证“失忆”
 | `langgraph_agent.py` | Day 15-16 | StateGraph：`agent` ↔ `tools` 两节点 + 条件边 |
 | `checkpoint_demo.py` | Day 17-19 | `SqliteSaver` 同一 `thread_id` 续聊 |
 | `checkpoint_amnesia_demo.py` | Day 17-19 | 换 `thread_id` 验证 checkpoint 隔离 |
+| `news_demo.py` | Day 20-21 | Demo 交付脚本（搜索 + checkpoint 续聊） |
 | `tools.py` | — | 天气 mock、计算器、Tavily 搜索工具 |
 | `config.py` | — | `ChatOpenAI`（兼容 DeepSeek Base URL） |
 

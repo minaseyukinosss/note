@@ -119,10 +119,10 @@ def run_agent(user_input: str, *, verbose: bool = False) -> str:
 
 def main() -> None:
     demos = [
-        "北京今天天气怎么样？",
+        # "北京今天天气怎么样？",
         "北京今天天气怎么样？再帮我算 23 * 47",
-        "100 除以 0 等于多少？",
-        "帮我订一张明天去上海的机票",
+        # "100 除以 0 等于多少？",
+        # "帮我订一张明天去上海的机票",
     ]
     for q in demos:
         print("\n" + "#" * 60)
