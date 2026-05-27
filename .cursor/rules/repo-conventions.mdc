@@ -20,16 +20,19 @@ alwaysApply: true
 
 - 含可运行代码的实践项目，**笔记归 `notes/`，源码归 `code/`**，不要混放。
 - 纯笔记主题（如 `javascript/`）可以平铺 `.md` 文件，无需 `notes/code` 拆分。
+- `ai-agent/` 有额外编号化约定，见 [ai-agent-learning.mdc](./ai-agent-learning.mdc)。
 
 # 命名规范
 
 - 笔记文件：中文标题或英文短横线，如 `闭包.md`、`week3-day1-notes.md`。
 - 不要使用空格、大写、特殊符号。
 - README 一律 `README.md`（大写）。
+- 已采用编号体系的主题（如 `ai-agent/`）必须保持编号稳定，不要新增未编号的根文档或零散 day notes。
 
 # 禁止提交
 
 - `node_modules/`、`dist/`、`build/`、`*.lock`、`.DS_Store`
+- `.env`、`.env.*`（除 `.env.example`）、`.venv/`、`__pycache__/`、`checkpoints.db*`、`*.sqlite*`
 - 已在 `.gitignore` 中配置，发现遗漏请补充而不是删除规则。
 
 # 新建主题/笔记时
