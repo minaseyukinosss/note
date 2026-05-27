@@ -55,3 +55,7 @@ alwaysApply: false
 # 复习自洽（`notes/` 下）
 
 `notes/` 目录下的笔记另遵守 [notes-self-contained.mdc](./notes-self-contained.mdc)：不用「Week2」「比上一周」等依赖记忆的写法；对照须写清文件名与一句话定义。
+
+# AI Agent 笔记
+
+`ai-agent/` 下的笔记另遵守 [ai-agent-learning.mdc](./ai-agent-learning.mdc)：根文档编号化、每周 notes 固定 `00-05`、过程记录统一写入 `04-过程记录.md`。

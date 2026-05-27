@@ -6,16 +6,31 @@
 - Day 10-12：纯 `openai` SDK 写出 Agent 循环（天气 + 计算器 + 可选 search）。
 - Day 13-14：故意制造失败场景，写复盘笔记。
 
+## 本周主线
+
+```text
+Week1 tool calling：固定两轮
+    ↓  外面套循环
+Day 10-12 ReAct：多轮工具调用，模型决定下一步
+    ↓  主动制造失败
+Day 13-14 复盘：知道哪些问题框架解决不了
+```
+
+Week2 的目标不是多接工具，而是把“协议 × 循环 × trace 排错 × eval 基线”吃透。
+
 ## 本周总结
 
-- [Week2 总结](./notes/week2-总结.md)（脉络、核心收获、踩坑、自测、与 Week3 衔接）
+- [05 本周总结](./notes/05-本周总结.md)（脉络、核心收获、踩坑、自测、与 Week3 衔接）
+- [跨周评估用例](../05-评估用例.md)（固定输入、预期工具调用、失败原因记录）
 
 ## 笔记 `notes/`
 
-- [Day 8-9 学习笔记](./notes/day8-学习笔记.md)（ReAct 概念 + Anthropic 博文导读）
-- [Day 8-9 自测复盘](./notes/day8-自测复盘.md)（概念测验错题 + 规范答案）
-- [Day 10-12 `react_agent.py` 学习笔记](./notes/day10-12-react_agent学习笔记.md)（主循环、工具层、与 Week1 对比）
-- [Day 13-14 复盘](./notes/day13-14-复盘.md)（失败场景、工具跳过、Agent 本质三问）
+- [00 知识地图](./notes/00-知识地图.md)（Function Calling → ReAct 循环 → Week3 图结构）
+- [01 每日任务](./notes/01-每日任务.md)（每天读什么、跑什么、制造什么失败）
+- [02 概念详解](./notes/02-概念详解.md)（ReAct、状态、退出条件、Agent vs Workflow）
+- [03 实验与踩坑](./notes/03-实验与踩坑.md)（`max_steps`、除零、跳过工具、多 tool_calls）
+- [04 过程记录](./notes/04-过程记录.md)（Day 8-14 的概念、自测、代码和失败复盘）
+- [05 本周总结](./notes/05-本周总结.md)（脉络、核心收获、踩坑、自测、与 Week3 衔接）
 
 ## 代码 `code/`
 
@@ -48,6 +63,18 @@ OPENAI_MODEL=deepseek-chat
 - [ ] `react_agent.py` 能回答「北京今天天气，再帮我算 23 × 47」这类多步问题。
 - [ ] 每一步能打印 `messages`，看清 LLM 如何选工具。
 - [ ] 除以 0 时 Agent 能恢复或礼貌失败；无合适工具时不瞎编。
+- [ ] 能解释 `max_steps` 是安全上限，不是正常完成条件。
+- [ ] 能说出至少 2 个模型不可控现象：乱选工具、跳过工具、重复调用、提前总结。
+- [ ] 至少跑过 `05-评估用例.md` 中 W2 开头的 4 条用例，并记录 Pass / Partial / Fail。
+- [ ] 能说明哪些工具属于读操作、哪些属于高风险副作用操作。
+
+## 进入 Week3 前
+
+请确认你能回答：
+
+1. `assistant(tool_calls)` 为什么必须先 append，才能 append `role: tool`？
+2. 一轮里出现多个 `tool_calls` 时，`messages` 会怎么变？
+3. 如果模型心算跳过 `calculator`，你会改 prompt、改工具，还是改成 workflow？
 
 ## 与 Week1 的关系
 

@@ -53,3 +53,6 @@ venv/
 .mypy_cache/
 .ruff_cache/
 checkpoints.db
+checkpoints.db-*
+*.sqlite
+*.sqlite-*
