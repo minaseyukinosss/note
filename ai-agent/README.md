@@ -17,7 +17,7 @@
 | Week1 | LLM 调用 + 多轮对话 + Function Calling | [`week1-hello-llm/`](./week1-hello-llm/README.md) |
 | Week2 | 手写 ReAct Agent（纯 openai SDK） | [`week2-react-agent/`](./week2-react-agent/README.md) |
 | Week3 | LangGraph 重写 + checkpoint + trace + 最小 Demo | [`week3-langgraph/`](./week3-langgraph/README.md) |
-| Week4 | RAG / 长期记忆 + 引用 + 评估集 | 建议下一步新增 |
+| Week4 | RAG + 引用 + RAG 评估闭环 | [`week4-rag-memory/`](./week4-rag-memory/README.md) |
 
 ## 推荐阅读顺序
 
@@ -46,8 +46,8 @@
 
 - 已完成：Week1-Week3 的主线笔记、代码示例、每周总结和验收清单。
 - 已优化：补齐项目审核报告、笔记整理规范、评估用例入口和 checkpoint 产物忽略规则。
-- 路线调整：Week3 聚焦 LangGraph / checkpoint / trace，不再把 RAG 和长期记忆塞进入门 3 周。
-- 下一阶段建议：新增 `week4-rag-memory/`，把 Week3 Agent 扩展为带本地知识库、引用来源和基础 eval 的 Agent。
+- 路线调整：Week3 聚焦 LangGraph / checkpoint / trace，RAG 推到 Week4。
+- 进行中：Week4 笔记骨架已就位（见 [`week4-rag-memory/`](./week4-rag-memory/README.md)），按 `notes/01-学习手册.md` 推进 Day 22-28。
 
 ## 知识结构
 
@@ -105,19 +105,11 @@ ai-agent/.venv/bin/python week2-react-agent/code/react_agent.py
 
 ## 后续扩展
 
-建议下一阶段继续沿用按周拆分的结构，先补一个 RAG + 评估闭环：
+Week4 已建好骨架（[`week4-rag-memory/`](./week4-rag-memory/README.md)），最小目标：给 Week3 Agent 增加本地 markdown 知识库检索工具，回答时返回引用来源，并跑通 [`05-评估用例.md`](./05-评估用例.md) 中的 W4-001 ~ W4-005。
 
-```
-ai-agent/
-└── week4-rag-memory/
-    ├── README.md
-    ├── notes/
-    │   ├── 00-知识地图.md
-    │   ├── 01-学习手册.md
-    │   ├── 02-概念详解.md
-    │   ├── 03-实验与踩坑.md
-    │   └── 05-本周总结.md
-    └── code/
-```
+Week4 之后再展开：
 
-Week4 的最小目标：给 Week3 Agent 增加本地 markdown 知识库检索工具，回答时返回引用来源，并把固定问题记录到 [`05-评估用例.md`](./05-评估用例.md)。
+- 长期记忆（写回向量库 / 数据库的策略）。
+- 生产化 RAG（hybrid search、rerank、HyDE、multi-query）。
+- 评估升级（LLM-as-judge、自动跑分、trace 对照）。
+- 多 Agent / 浏览器 Agent / 代码 Agent 等综合项目方向。
