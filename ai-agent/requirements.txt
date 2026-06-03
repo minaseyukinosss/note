@@ -7,6 +7,6 @@ langgraph-checkpoint-sqlite>=2.0.0
 langfuse>=2.0.0
 tavily-python>=0.5.0
 
-# Week4 RAG 候选依赖（实跑选型确定后再取消注释）
-# chromadb>=0.5.0
-# langchain-text-splitters>=0.3.0
+# Week4 RAG
+chromadb>=0.5.0
+langchain-text-splitters>=0.3.0

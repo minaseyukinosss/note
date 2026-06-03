@@ -1,13 +1,34 @@
-# Week4 代码占位
+# Week4 代码
 
-实跑到对应天数时再创建脚本。建议骨架（与 [`../README.md`](../README.md) 一致）：
-
-| 文件 | 对应天数 | 说明 |
+| 文件 | 对应天数 | 状态 |
 | --- | --- | --- |
-| `build_index.py` | Day 22-23 | 读取 `knowledge/*.md`，切分 + embedding + 写入向量库（幂等） |
-| `retrieve.py` | Day 22-23 | 独立检索脚本，给定 query 返回 top-k chunk + 来源 |
-| `rag_agent.py` | Day 24-26 | 基于 Week3 [`langgraph_agent.py`](../../week3-langgraph/code/langgraph_agent.py)，新增 `retrieve` 工具 |
-| `eval_rag.py` | Day 27-28 | 跑 golden cases，输出召回 / 引用 / 幻觉指标 |
-| `knowledge/` | — | 本地 markdown 知识库（可放 `ai-agent/` 其他笔记的副本或软链） |
+| `build_index.py` | Day 22-23 | ✅ 已实现 |
+| `retrieve.py` | Day 22-23 | ✅ 已实现 |
+| `rag_agent.py` | Day 24-26 必做 | ✅ 已实现 |
+| `eval_rag.py` | Day 27-28 进阶 | 待实现 |
+| `knowledge/` | — | 3 篇本地 markdown 知识库 |
 
-环境变量与依赖沿用主题根目录的 `ai-agent/.venv` 与 `requirements.txt`，新增包等实际选型确定后再加。
+Week4 的代码优先级：先跑通 `rag_agent.py` 与 W4-001 ~ W4-003；再做 `eval_rag.py`、W4-004 ~ W4-005。
+
+## Day 24-26 跑法
+
+```bash
+.venv/bin/python week4-rag-memory/code/rag_agent.py
+```
+
+内置 W4-001 ~ W4-003 三条 demo，verbose 模式会打印 trace 与引用校验结果。
+
+## Day 22-23 跑法
+
+```bash
+cd ai-agent
+source .venv/bin/activate
+pip install -r requirements.txt
+
+python week4-rag-memory/code/build_index.py
+python week4-rag-memory/code/retrieve.py "ReAct 是什么"
+python week4-rag-memory/code/retrieve.py "强化学习 PPO 算法"   # W4-003：应未命中
+python week4-rag-memory/code/retrieve.py "今天股票涨了吗" --raw   # 观察原始分数
+```
+
+技术选型：Chroma 本地持久化 + 默认 onnx embedding（`all-MiniLM-L6-v2`）+ `MarkdownHeaderTextSplitter`。

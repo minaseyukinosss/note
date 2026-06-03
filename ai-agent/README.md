@@ -105,7 +105,7 @@ ai-agent/.venv/bin/python week2-react-agent/code/react_agent.py
 
 ## 后续扩展
 
-Week4 已建好骨架（[`week4-rag-memory/`](./week4-rag-memory/README.md)），最小目标：给 Week3 Agent 增加本地 markdown 知识库检索工具，回答时返回引用来源，并跑通 [`05-评估用例.md`](./05-评估用例.md) 中的 W4-001 ~ W4-005。
+Week4 已建好骨架（[`week4-rag-memory/`](./week4-rag-memory/README.md)）。最小目标：给 Week3 Agent 增加本地 markdown 知识库检索工具，回答时返回引用来源，并跑通 [`05-评估用例.md`](./05-评估用例.md) 中的 W4-001 ~ W4-003。W4-004 ~ W4-005、10-20 条 golden cases 和自动评估脚本作为进阶扩展。
 
 Week4 之后再展开：
 

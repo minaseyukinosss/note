@@ -2,9 +2,23 @@
 
 ## 本周目标
 
-- Day 22-23：吃透 RAG 基础链路（chunking → embedding → retrieval → 生成），用本地 markdown 笔记建一个最小知识库。
-- Day 24-26：把 `retrieve` 封装成 LangGraph 工具接入 Agent，回答必须返回引用来源，并处理"检索不到 / 命中矛盾 / Prompt Injection"。
-- Day 27-28：维护 10-20 条 RAG golden cases，评估召回率、引用正确率、幻觉率，与无 RAG 版做对照。
+Week4 的主目标不是"把 RAG 全家桶学完"，而是先跑通一个可信闭环：
+
+```text
+本地笔记 → 检索工具 → Agent 带引用回答 → 固定用例验收
+```
+
+### 必做闭环
+
+- Day 22-23：吃透 RAG 基础链路（chunking → embedding → retrieval），用本地 markdown 笔记建一个最小知识库。
+- Day 24-26：把 `retrieve` 封装成 LangGraph 工具接入 Agent，回答必须返回引用来源，并能处理"检索不到"。
+- Day 27-28：至少跑通 W4-001 ~ W4-003，记录召回、引用、未命中三类结果。
+
+### 进阶扩展
+
+- W4-004：处理命中内容之间存在矛盾的情况。
+- W4-005：处理检索片段中的 Prompt Injection。
+- 扩展到 10-20 条 RAG golden cases，并实现 `eval_rag.py` 自动统计。
 
 ## 本周主线
 
@@ -15,7 +29,9 @@ Day 22-23 知识库构建：切分 → embedding → 向量库
     ↓  当工具来用
 Day 24-26 retrieve 工具：top-k + 引用片段 + 不可信外部内容隔离
     ↓  量化质量
-Day 27-28 RAG eval：golden cases + 召回 / 引用 / 幻觉指标
+Day 27-28 最小评估：W4-001 ~ W4-003 + 运行记录
+    ↓  进阶量化
+W4-004 / W4-005 + 10-20 条 golden cases + eval_rag.py
 ```
 
 Week4 的关键判断：
@@ -36,7 +52,7 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-> Week4 新增向量库与 embedding 依赖，候选见 [`notes/01-学习手册.md`](./notes/01-学习手册.md) Day 22-23 的"技术选型"段落。实跑后再写入 `requirements.txt`。
+> Week4 向量库与 embedding 依赖已写入 [`../requirements.txt`](../requirements.txt)（`chromadb`、`langchain-text-splitters`）。
 
 ## 笔记 `notes/`
 
@@ -54,17 +70,21 @@ pip install -r requirements.txt
 | --- | --- | --- |
 | `build_index.py` | Day 22-23 | 读取 `knowledge/*.md`，切分 + embedding + 写入向量库 |
 | `retrieve.py` | Day 22-23 | 独立检索脚本，给定 query 返回 top-k chunk + 来源 |
-| `rag_agent.py` | Day 24-26 | 在 Week3 LangGraph 图上增加 `retrieve` 工具，回答带引用 |
-| `eval_rag.py` | Day 27-28 | 跑 golden cases，输出召回 / 引用 / 幻觉指标 |
+| `rag_agent.py` | Day 24-26 必做 | 在 Week3 LangGraph 图上增加 `retrieve` 工具，回答带引用 |
+| `eval_rag.py` | Day 27-28 进阶 | 跑 golden cases，输出召回 / 引用 / 幻觉指标 |
 | `knowledge/` | — | 本地 markdown 知识库（可直接软链到 `ai-agent/` 下其他笔记） |
 
-代码细节先不实现，等学习手册推到对应天再写。
+**当前进度**：Day 22-23（`build_index.py`、`retrieve.py`）与 Day 24-26 必做（`rag_agent.py`）已实现；Day 27-28 的 `eval_rag.py` 属于进阶。详见 [`code/README.md`](./code/README.md)。
 
 ## 跨周评估用例
 
-- W4-001 ~ W4-005 已登记在 [`../05-评估用例.md`](../05-评估用例.md)：覆盖召回、引用、未命中、矛盾片段、Prompt Injection。
+- 必跑：W4-001 ~ W4-003，覆盖召回、引用、未命中。
+- 进阶：W4-004 ~ W4-005，覆盖矛盾片段和 Prompt Injection。
+- 用例已登记在 [`../05-评估用例.md`](../05-评估用例.md)。
 
 ## 验收清单
+
+### 必做
 
 - [ ] 能解释 RAG 链路：chunking → embedding → 向量检索 → 带引用生成，每一步的失败模式分别是什么。
 - [ ] 能解释 RAG 与 Memory 的差别（按 query 拉数据 vs 跨轮状态管理）。
@@ -72,7 +92,12 @@ pip install -r requirements.txt
 - [ ] `rag_agent.py` 在 LangGraph 图中正确接入 `retrieve` 工具，回答带文件名 + 段落引用。
 - [ ] 检索未命中时能明确回答"不知道"，而不是用模型先验编一段。
 - [ ] 至少跑通 W4-001 ~ W4-003，并记录运行结果到 `05-评估用例.md`。
+
+### 进阶
+
+- [ ] W4-004 能列出冲突观点和各自来源，不强行综合。
 - [ ] 能解释外部检索片段不可信，prompt injection 案例（W4-005）能正确拒绝。
+- [ ] `eval_rag.py` 能自动跑 golden cases，并输出召回 / 引用 / 幻觉统计。
 
 ## 与 Week3 的关系
 

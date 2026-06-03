@@ -56,3 +56,4 @@ checkpoints.db
 checkpoints.db-*
 *.sqlite
 *.sqlite-*
+.chroma/
