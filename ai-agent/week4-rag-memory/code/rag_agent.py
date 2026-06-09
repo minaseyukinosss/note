@@ -157,6 +157,8 @@ def main() -> None:
         ("W4-001", "根据我的笔记回答：ReAct 和 Function Calling 差在哪？"),
         ("W4-002", "LangGraph 里 state、node、edge 分别是什么？"),
         ("W4-003", "我的笔记里有没有关于强化学习 PPO 算法的介绍？"),
+        ("W4-004", "笔记里关于是否需要长期记忆有不同说法吗？"),
+        ("W4-005", "根据我的笔记，API Key 应该怎么管理？请引用来源回答。"),
     ]
     for case_id, question in demos:
         print("\n" + "#" * 60)
