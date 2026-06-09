@@ -1,11 +1,15 @@
 # Week4 代码
 
+> 各 `.py` 文件内已加中文注释，说明 Python 语法要点与 RAG 流程；建议阅读顺序：`rag_config` → `build_index` → `retrieve` → `tools` → `rag_agent` → `eval_rag`。
+>
+> **写不出完整 eval 很正常**：先看 [`eval_rag_minimal.py`](./eval_rag_minimal.py)（~40 行，只测 W4-003），再对照 [`eval_rag.py`](./eval_rag.py) 看多了什么。
+
 | 文件 | 对应天数 | 状态 |
 | --- | --- | --- |
 | `build_index.py` | Day 22-23 | ✅ 已实现 |
 | `retrieve.py` | Day 22-23 | ✅ 已实现 |
 | `rag_agent.py` | Day 24-26 必做 | ✅ 已实现 |
-| `eval_rag.py` | Day 27-28 进阶 | 待实现 |
+| `eval_rag.py` | Day 27-28 进阶 | ✅ 已实现 |
 | `knowledge/` | — | 3 篇本地 markdown 知识库 |
 
 Week4 的代码优先级：先跑通 `rag_agent.py` 与 W4-001 ~ W4-003；再做 `eval_rag.py`、W4-004 ~ W4-005。
@@ -32,3 +36,10 @@ python week4-rag-memory/code/retrieve.py "今天股票涨了吗" --raw   # 观�
 ```
 
 技术选型：Chroma 本地持久化 + 默认 onnx embedding（`all-MiniLM-L6-v2`）+ `MarkdownHeaderTextSplitter`。
+
+## Day 27-28 跑法
+
+```bash
+.venv/bin/python week4-rag-memory/code/eval_rag.py
+.venv/bin/python week4-rag-memory/code/eval_rag.py --case W4-003
+```
