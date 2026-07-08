@@ -9,6 +9,7 @@
 | JavaScript | JS 语言核心机制（闭包、原型、异步…） | [`javascript/`](./javascript/README.md) |
 | Webpack | 6 周系统学习：从最小配置到源码阅读 | [`webpack/`](./webpack/README.md) |
 | AI Agent | LLM Agent 学习路线：工具协议 / ReAct / LangGraph / RAG / 评估 | [`ai-agent/`](./ai-agent/README.md) |
+| Python | 面向 TS 背景的 90 天 Python 提升计划（Agent 工程 + 源码阅读） | [`python/`](./python/README.md) |
 
 ## 仓库约定
 
