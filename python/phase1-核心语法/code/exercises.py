@@ -76,7 +76,11 @@ def unique_tools(names: list[str]) -> set[str]:
 def append_log(msg: str, logs: list[str] | None = None) -> list[str]:
     """把 msg 追加到 logs 并返回；不传 logs 时每次都应是全新的 list。"""
     # TODO: 用 None 作为哨兵，函数内再初始化
-    raise NotImplementedError
+    # raise NotImplementedError
+    if logs is None:
+        logs = []
+    logs.append(msg)
+    return logs
 
 
 # ---------------------------------------------------------------------------
@@ -85,7 +89,10 @@ def append_log(msg: str, logs: list[str] | None = None) -> list[str]:
 def call_with_defaults(func, *args, **kwargs):
     """给 func 注入默认 temperature=0.7（若调用方未指定），再透传其余参数。"""
     # TODO: 若 kwargs 里没有 temperature，补上 0.7，再 return func(*args, **kwargs)
-    raise NotImplementedError
+    # raise NotImplementedError
+    if "temperature" not in kwargs:
+        kwargs['temperature'] = 0.7
+    return func(*args, **kwargs)
 
 
 # ---------------------------------------------------------------------------
@@ -106,7 +113,7 @@ if __name__ == "__main__":
     assert get_timeout({}) == 30 and get_timeout({"timeout": 5}) == 5
     assert user_contents([{"role": "user", "content": "hi"}, {"role": "system", "content": "x"}]) == ["hi"]
     assert unique_tools(["a", "b", "a"]) == {"a", "b"}
-    # assert append_log("x") == ["x"] and append_log("y") == ["y"]  # 不共享！
-    # assert call_with_defaults(lambda **k: k["temperature"]) == 0.7
+    assert append_log("x") == ["x"] and append_log("y") == ["y"]  # 不共享！
+    assert call_with_defaults(lambda **k: k["temperature"]) == 0.7
     # c = make_counter(); assert (c(), c(), c()) == (1, 2, 3)
     print("全部通过。把上面 assert 取消注释来逐题验证。")
