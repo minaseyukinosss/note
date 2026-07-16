@@ -102,7 +102,55 @@ def call_with_defaults(func, *args, **kwargs):
 def make_counter():
     """返回一个每次调用自增并返回当前值的函数。"""
     # TODO: 用 nonlocal 实现
-    raise NotImplementedError
+    # raise NotImplementedError
+    count = 0
+    def counter():
+        nonlocal count
+        count += 1
+        return count
+    return counter
+
+
+# ---------------------------------------------------------------------------
+# 9. 综合：按 role 分组消息（Day 13 自加题）
+#    dict 推导式 + .get；Agent 用途：按 role 拆分对话、统计各角色发言
+# ---------------------------------------------------------------------------
+def group_by_role(messages: list[dict]) -> dict[str, list[str]]:
+    """返回 {role: [content, ...]}，同一 role 的 content 按出现顺序收集。"""
+    # 步骤 1：收集 messages 里出现过的所有 role（去重）
+    # 提示：集合推导式 { ... for m in messages }
+    roles = {m.get("role") for m in messages}
+
+    # 步骤 2：对每个 role，筛出属于它的 content，组成 dict
+    # 提示：dict 推导式 { role: [...] for role in roles }
+    #       内层列表可用列表推导式 + m.get("role") 做条件
+    result = { role: [m.get("content") for m in messages if m.get("role") == role] for role in roles}
+
+    return result
+
+
+# ---------------------------------------------------------------------------
+# 10. 综合：扁平化嵌套 dict（Day 13 自加题）
+#    递归 + {**a, **b} 合并；Agent 用途：展平嵌套 JSON 配置 / tool 参数
+# ---------------------------------------------------------------------------
+def flatten_dict(d: dict, parent_key: str = "", sep: str = ".") -> dict:
+    """把 {"a": {"b": 1}, "c": 2} 变成 {"a.b": 1, "c": 2}。"""
+    result: dict = {}
+
+    for key, value in d.items():
+        # 步骤 1：拼出当前 key 的完整路径
+        # 提示：顶层 parent_key 为空时直接用 key；否则 f"{parent_key}{sep}{key}"
+        full_key = parent_key + sep + key if parent_key else key
+
+        if isinstance(value, dict):
+            # 步骤 2a：嵌套 dict → 递归，把子结果合并进 result
+            # 提示：{**result, **flatten_dict(...)}
+            result = {**result, **flatten_dict(value, full_key, sep)} 
+        else:
+            # 步骤 2b：叶子值 → 直接写入 result[full_key] = value
+            result[full_key] = value
+
+    return result
 
 
 if __name__ == "__main__":
@@ -115,5 +163,13 @@ if __name__ == "__main__":
     assert unique_tools(["a", "b", "a"]) == {"a", "b"}
     assert append_log("x") == ["x"] and append_log("y") == ["y"]  # 不共享！
     assert call_with_defaults(lambda **k: k["temperature"]) == 0.7
-    # c = make_counter(); assert (c(), c(), c()) == (1, 2, 3)
+    c = make_counter(); assert (c(), c(), c()) == (1, 2, 3)
+    assert group_by_role([
+        {"role": "user", "content": "hi"},
+        {"role": "assistant", "content": "hello"},
+        {"role": "user", "content": "bye"},
+    ]) == {"user": ["hi", "bye"], "assistant": ["hello"]}
+    assert flatten_dict({"a": {"b": 1, "c": {"d": 2}}, "e": 3}) == {
+        "a.b": 1, "a.c.d": 2, "e": 3,
+    }
     print("全部通过。把上面 assert 取消注释来逐题验证。")
