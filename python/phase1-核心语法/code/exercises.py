@@ -153,6 +153,40 @@ def flatten_dict(d: dict, parent_key: str = "", sep: str = ".") -> dict:
     return result
 
 
+# ---------------------------------------------------------------------------
+# 11. 异常处理：安全转换（Day 15）
+#    try/except 捕获具体异常；Agent 用途：解析 LLM 输出 / API 字段时容错
+# ---------------------------------------------------------------------------
+def safe_int(s: str, default: int = 0) -> int:
+    """把 s 转成 int；无法转换时返回 default，不抛异常。"""
+    # TODO: try int(s)，捕获 ValueError 返回 default
+    try:
+        return int(s)
+    except ValueError:
+        return default
+
+
+# ---------------------------------------------------------------------------
+# 12. 自定义异常 + EAFP（Day 16）
+#    EAFP = 先做了再说，错了再 except（Easier to Ask Forgiveness than Permission）
+#    LBYL = 先 if 检查再操作（Look Before You Leap）
+#    本题用 EAFP：直接 int(s)，失败 raise MalformedLineError（为 Day 21 JSONL CLI 铺垫）
+# ---------------------------------------------------------------------------
+class MalformedLineError(Exception):
+    """字符串无法按预期格式解析。"""
+
+
+def parse_int(s: str) -> int:
+    """把 s 转成 int；失败时 raise MalformedLineError（带 s 的信息）。"""
+    # TODO: EAFP 写法 —— 直接 try int(s)，失败再 raise MalformedLineError
+    # 提示：raise MalformedLineError(f"...") from e  保留原始原因链
+    # raise NotImplementedError
+    try:
+        return int(s)
+    except ValueError as e:
+        raise MalformedLineError(f"无法解析字符串: {s}") from e
+
+
 if __name__ == "__main__":
     # 实现后逐个取消注释验证
     assert is_empty([]) and is_empty("") and is_empty(None) and not is_empty([1])
@@ -172,4 +206,11 @@ if __name__ == "__main__":
     assert flatten_dict({"a": {"b": 1, "c": {"d": 2}}, "e": 3}) == {
         "a.b": 1, "a.c.d": 2, "e": 3,
     }
+    assert safe_int("42") == 42 and safe_int("abc", default=-1) == -1
+    assert parse_int("99") == 99
+    try:
+        parse_int("abc")
+        assert False, "应抛出 MalformedLineError"
+    except MalformedLineError as e:
+        assert "abc" in str(e)
     print("全部通过。把上面 assert 取消注释来逐题验证。")
