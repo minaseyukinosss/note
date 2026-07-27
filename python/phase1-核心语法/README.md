@@ -28,6 +28,23 @@ python exercises.py
 
 `exercises.py` 里是一组 TODO 练习（每题附 Python 意图说明），做完取消注释运行验证。
 
+Day 17 模块/import 实验：
+
+```bash
+cd python/phase1-核心语法/code/day17-import-lab
+python greet.py          # __name__ 实验
+python import_styles.py  # import 写法对比
+python -c "import module_a"  # 循环导入（预期报错）
+```
+
+Day 18–21 JSONL CLI（在 `code/` 下）：
+
+```bash
+cd python/phase1-核心语法/code
+python -m logtool
+python -m logtool logtool/sample.jsonl
+```
+
 ## 笔记 `notes/`
 
 - [01-学习手册](./notes/01-学习手册.md)：当天任务、观察点、记录区。
