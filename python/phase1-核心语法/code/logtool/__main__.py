@@ -14,13 +14,21 @@ def main(argv: list[str] | None = None) -> int:
     if not args:
         print(f"logtool {__version__}")
         print("用法: python -m logtool <file.jsonl>")
-        print("Day 18：包与相对导入已就绪；Day 19–20 补解析与统计。")
         return 0
 
     path = args[0]
-    # Day 20 会真正调用下面两行；现在 import 成功即说明相对导入没问题
-    _ = read_lines, count_by_level, path
-    print(f"logtool {__version__}: 收到文件 {path!r}，完整流程 Day 20 接通。")
+    try:
+        records, bad_count = read_lines(path)
+    except FileNotFoundError:
+        print(f"文件不存在: {path!r}", file=sys.stderr)
+        return 1
+
+    counts = count_by_level(records)
+    print(f"good: {len(records)}")
+    print(f"bad: {bad_count}")
+    print("level:")
+    for level in sorted(counts):
+        print(f"  {level}: {counts[level]}")
     return 0
 
 
